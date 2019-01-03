@@ -1,38 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
-    
-    <title>To do list</title>
-</head>
-<body>
-    <div>
-        <button onclick="handlers.toggleAll()">Toggle All</button>
-    </div>
-    <div>
-        <button onclick="handlers.addTodo()">Add</button>
-        <input id="addTodoTextInput" type="text">
-    </div>
-          
-    <div>
-        <button onclick="handlers.changeTodo()">Change</button>
-        <input id="changeTodoPositionInput" type="number">
-        <input id="changeTodoTextInput" type="text">
-    </div>
-          
-    <div>
-        <button onclick="handlers.deleteTodo()">Delete</button>
-        <input id="deleteTodoPositionInput" type="number">
-    </div>
-          
-    <div>
-        <button onclick="handlers.toggleCompleted()">Toggle completed</button>
-        <input id="toggleCompletedPositionInput" type="number">
-    </div>
+<html>
+  <head>
+    <title>Practical Todos</title>
+    <link id="favicon" rel="icon" href="https://cdn.gomix.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Ffavicon.ico" type="image/x-icon">
+  </head>
+  <body>
+    <h1>Todo List</h1>
 
+    <div>
+      <button onclick="handlers.toggleAll()">Toggle All</button>
+    </div>
+    
+    <div>
+      <button onclick="handlers.addTodo()">Add</button>
+      <input id="addTodoTextInput" type="text">
+    </div>
+    
+    <div>
+      <button onclick="handlers.changeTodo()">Change Todo</button>
+      <input id="changeTodoPositionInput" type="number">
+      <input id="changeTodoTextInput" type="text">
+    </div>
+    
+    <div>
+      <button onclick="handlers.toggleCompleted()">Toggle Completed</button>
+      <input id="toggleCompletedPositionInput" type="number">
+    </div>
+    
+    <ul>
+    </ul>
     <script src="to do list.js"></script>
-</body>
+  </body>
 </html>
