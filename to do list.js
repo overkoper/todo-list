@@ -58,10 +58,8 @@ var handlers = {
     todoList.deleteTodo(position);
     view.displayTodos();
   },
-  toggleCompleted: function() {
-    var toggleCompletedPositionInput = document.getElementById('toggleCompletedPositionInput');
-    todoList.toggleCompleted(toggleCompletedPositionInput.valueAsNumber);
-    toggleCompletedPositionInput.value = '';
+  toggleCompleted: function(position) {
+    todoList.toggleCompleted(position);
     view.displayTodos();
   },
   toggleAll: function() {
@@ -85,6 +83,7 @@ var view = {
       }
       todoLi.id = position;
       todoLi.textContent = todoTextWithCompletion;
+      todoLi.appendChild(this.createToggleCompletedButton());
       todoLi.appendChild(this.createDeleteButton());
       todosUl.appendChild(todoLi);      
     }, this);
@@ -97,15 +96,23 @@ var view = {
   return deleteButton;
   },
   setUpEventListeners: function(){
-  var todosUl = document.querySelector("ul");
-    
+  var todosUl = document.querySelector("ul");  
   todosUl.addEventListener("click", function(event){
   var elementClicked = event.target;
   if (elementClicked.className === "deleteButton"){
       handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
+      }else if(elementClicked.className === "toggleCompletedButton"){
+          handlers.toggleCompleted(parseInt(elementClicked.parentNode.id));
       }
+
 });
-  }
+  },
+  createToggleCompletedButton: function(){
+    var toggleCompletedButton = document.createElement("button");
+    toggleCompletedButton.textContent = "Completed";
+    toggleCompletedButton.className = "toggleCompletedButton";
+    return toggleCompletedButton;
+  } 
 };
 
 var todosUl = document.querySelector("ul");
@@ -113,7 +120,9 @@ todosUl.addEventListener("click", function(event){
   var elementClicked = event.target;
   if (elementClicked.className === "deleteButton"){
       handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
-      }
+      }else if(elementClicked.className === "toggleCompletedButton"){
+        handlers.toggleCompleted(parseInt(elementClicked.parentNode.id));
+    }
 });
 
 
