@@ -1,0 +1,16 @@
+h1{
+    font-family: 'Hammersmith One', sans-serif;
+}
+ul{
+    width: 500px;
+    height: 500px;
+    border: 2px solid black;
+}
+li{
+    font-family: 'Kalam', cursive;
+    font-size: 2em;
+}
+button{
+    font-family: 'Hammersmith One', sans-serif;
+    background-color: white;
+}
