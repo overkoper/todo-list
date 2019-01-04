@@ -46,12 +46,8 @@ var handlers = {
     addTodoTextInput.value = '';
     view.displayTodos();
   },
-  changeTodo: function() {
-    var changeTodoPositionInput = document.getElementById('changeTodoPositionInput');
-    var changeTodoTextInput = document.getElementById('changeTodoTextInput');
-    todoList.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
-    changeTodoPositionInput.value = '';
-    changeTodoTextInput.value = '';
+  changeTodo: function(position, todo) {
+    todoList.changeTodo(position, todo);
     view.displayTodos();
   },
   deleteTodo: function(position) {
@@ -83,6 +79,8 @@ var view = {
       }
       todoLi.id = position;
       todoLi.textContent = todoTextWithCompletion;
+      todoLi.appendChild(this.createChangeTodoButton(position));
+      todoLi.appendChild(this.createChangeTodoField(position));
       todoLi.appendChild(this.createToggleCompletedButton());
       todoLi.appendChild(this.createDeleteButton());
       todosUl.appendChild(todoLi);      
@@ -90,40 +88,63 @@ var view = {
     
   },
   createDeleteButton: function(){
-  var deleteButton = document.createElement("button");
-  deleteButton.textContent = "Delete";
-  deleteButton.className = "deleteButton";
-  return deleteButton;
-  },
-  setUpEventListeners: function(){
-  var todosUl = document.querySelector("ul");  
-  todosUl.addEventListener("click", function(event){
-  var elementClicked = event.target;
-  if (elementClicked.className === "deleteButton"){
-      handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
-      }else if(elementClicked.className === "toggleCompletedButton"){
-          handlers.toggleCompleted(parseInt(elementClicked.parentNode.id));
-      }
-
-});
+    var deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.className = "deleteButton";
+    return deleteButton;
   },
   createToggleCompletedButton: function(){
     var toggleCompletedButton = document.createElement("button");
     toggleCompletedButton.textContent = "Completed";
     toggleCompletedButton.className = "toggleCompletedButton";
     return toggleCompletedButton;
-  } 
-};
-
-var todosUl = document.querySelector("ul");
-todosUl.addEventListener("click", function(event){
-  var elementClicked = event.target;
-  if (elementClicked.className === "deleteButton"){
-      handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
+  }, 
+  createChangeTodoButton: function(position){
+    var createChangeTodoButton = document.createElement("button");
+    createChangeTodoButton.textContent = "Edit";
+    createChangeTodoButton.className = "changeTodoButton";
+    createChangeTodoButton.id = "button " + position;
+    createChangeTodoButton.hidden = true;
+    return createChangeTodoButton;
+  },
+  createChangeTodoField: function(position){
+    var createChangeTodoField = document.createElement("input");
+    createChangeTodoField.className = "changeTodoField";
+    createChangeTodoField.type = "text";
+    createChangeTodoField.id = "field " + position;
+    createChangeTodoField.hidden = true;
+    return createChangeTodoField;
+  },
+  setUpEventListeners: function(){
+    var todosUl = document.querySelector("ul");
+    todosUl.addEventListener("click", function(event){
+      var elementClicked = event.target;
+      var changeTodoFieldValue = document.getElementById("field " + parseInt(elementClicked.parentNode.id));
+      if (elementClicked.className === "deleteButton"){
+          handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
       }else if(elementClicked.className === "toggleCompletedButton"){
-        handlers.toggleCompleted(parseInt(elementClicked.parentNode.id));
-    }
-});
+            handlers.toggleCompleted(parseInt(elementClicked.parentNode.id));
+        }else if(elementClicked.className === "changeTodoButton"){
+          handlers.changeTodo(parseInt(elementClicked.parentNode.id), changeTodoFieldValue.value);
+        }else if(elementClicked.className === ""){
+          var field = document.getElementById("field " + parseInt(elementClicked.id));
+          var button = document.getElementById("button " + parseInt(elementClicked.id));
+          if(field.hidden === true){
+            field.hidden = false;
+          }else{
+            field.hidden = true;
+          }
+          if(button.hidden === true){
+          button.hidden = false;
+          }else{
+          button.hidden = true;
+          }
+        }
+    });
+  },
+  
+};
+view.setUpEventListeners();
 
 
 
