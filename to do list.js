@@ -79,8 +79,8 @@ var view = {
       }
       todoLi.id = position;
       todoLi.textContent = todoTextWithCompletion;
-      todoLi.appendChild(this.createChangeTodoButton(position));
       todoLi.appendChild(this.createChangeTodoField(position));
+      todoLi.appendChild(this.createChangeTodoButton(position));
       todoLi.appendChild(this.createToggleCompletedButton());
       todoLi.appendChild(this.createDeleteButton());
       todosUl.appendChild(todoLi);      
@@ -88,20 +88,20 @@ var view = {
     
   },
   createDeleteButton: function(){
-    var deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
+    var deleteButton = document.createElement("img");
+    deleteButton.src="icons/x-mark.svg";
     deleteButton.className = "deleteButton";
     return deleteButton;
   },
   createToggleCompletedButton: function(){
-    var toggleCompletedButton = document.createElement("button");
-    toggleCompletedButton.textContent = "Completed";
+    var toggleCompletedButton = document.createElement("img");
+    toggleCompletedButton.src = "icons/check-mark.svg"
     toggleCompletedButton.className = "toggleCompletedButton";
     return toggleCompletedButton;
   }, 
   createChangeTodoButton: function(position){
-    var createChangeTodoButton = document.createElement("button");
-    createChangeTodoButton.textContent = "Edit";
+    var createChangeTodoButton = document.createElement("img");
+    createChangeTodoButton.src = "icons/pencil.svg"
     createChangeTodoButton.className = "changeTodoButton";
     createChangeTodoButton.id = "button " + position;
     createChangeTodoButton.hidden = true;
