@@ -60,3 +60,34 @@ img:hover{
     border-radius: 10px;
     background-color: rgb(211, 134, 82);
 }
+@media only screen and (max-width: 550px){
+    ul{
+        width: 90%;
+        height: 500px;
+    }
+}
+@media only screen and (max-height: 775px){
+    ul{
+        min-height: 200px;
+        width: 90%;
+        height: 80%;
+    }
+}
+@media only screen and (max-width: 255px){
+    ul{
+        min-height: 200px;
+        width: 90%;
+        height: 80%;
+    }
+    img{
+        margin: 0px;
+    }
+    img.addTodo{
+        width: 30%;
+        height: auto;
+    }
+    input{
+        padding: 0px;
+        width: 60%;
+    }
+}
