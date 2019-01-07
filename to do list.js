@@ -42,9 +42,15 @@ var todoList = {
 var handlers = {
   addTodo: function() {
     var addTodoTextInput = document.getElementById('addTodoTextInput');
+    var alert = document.getElementById("alert");
+    if(addTodoTextInput.value === ""){
+      alert.classList.remove("hidden");
+    }else{
+    alert.classList.add("hidden");
     todoList.addTodo(addTodoTextInput.value);
     addTodoTextInput.value = '';
     view.displayTodos();
+    }
   },
   changeTodo: function(position, todo) {
     todoList.changeTodo(position, todo);
@@ -73,9 +79,10 @@ var view = {
       var todoTextWithCompletion = "";
       
       if (todo.completed === true) {
-        todoTextWithCompletion = '(x) ' + todo.todoText;
+        todoTextWithCompletion = todo.todoText;
+        todoLi.classList.add("completed");
       } else {
-        todoTextWithCompletion = '( ) ' + todo.todoText;
+        todoTextWithCompletion = todo.todoText;
       }
       todoLi.id = position;
       todoLi.textContent = todoTextWithCompletion;
@@ -83,7 +90,7 @@ var view = {
       todoLi.appendChild(this.createChangeTodoButton(position));
       todoLi.appendChild(this.createToggleCompletedButton());
       todoLi.appendChild(this.createDeleteButton());
-      todosUl.appendChild(todoLi);      
+      todosUl.appendChild(todoLi);    
     }, this);
     
   },
@@ -120,15 +127,24 @@ var view = {
     todosUl.addEventListener("click", function(event){
       var elementClicked = event.target;
       var changeTodoFieldValue = document.getElementById("field " + parseInt(elementClicked.parentNode.id));
+      var alert = document.getElementById("alert");
       if (elementClicked.className === "deleteButton"){
           handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
+          alert.classList.add("hidden");
       }else if(elementClicked.className === "toggleCompletedButton"){
             handlers.toggleCompleted(parseInt(elementClicked.parentNode.id));
+            alert.classList.add("hidden");
         }else if(elementClicked.className === "changeTodoButton"){
+          if(changeTodoFieldValue.value === ""){
+            alert.classList.remove("hidden");
+          }else{
           handlers.changeTodo(parseInt(elementClicked.parentNode.id), changeTodoFieldValue.value);
+          alert.classList.add("hidden");
+          }
         }else if(elementClicked.className === ""){
           var field = document.getElementById("field " + parseInt(elementClicked.id));
           var button = document.getElementById("button " + parseInt(elementClicked.id));
+          alert.classList.add("hidden");
           if(field.hidden === true){
             field.hidden = false;
           }else{

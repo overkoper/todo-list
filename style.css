@@ -1,5 +1,16 @@
+.hidden{
+    display: none;
+}
+.completed{
+    color: grey;
+    text-decoration: line-through;
+}
 h1{
     font-family: 'Hammersmith One', sans-serif;
+}
+div#alert{
+    font-family: 'Hammersmith One', sans-serif;
+    color:red;
 }
 ul{
     list-style-type: none;
